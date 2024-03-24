@@ -8,7 +8,8 @@ and methods for all classes
 
 from uuid import uuid4
 from datetime import datetime
-
+from models.engine.file_storage import FileStorage
+from models import storage
 
 class BaseModel():
     """BaseModel class that contains all methods and attributes
@@ -32,6 +33,9 @@ class BaseModel():
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
+
+            storage.new()
+
            # self.updated_at = datetime.now()
 
     def __str__(self):
@@ -43,8 +47,10 @@ class BaseModel():
 
     def save(self):
         """updates time stamp on updated_at time stamp"""
-
+        
         updated_at = datetime.now
+
+        storage.save()
 
     def to_dict(self):
         """returns key, value pairs of the __dict__ of instance"""

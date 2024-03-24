@@ -6,7 +6,6 @@ and methods for all classes
 """
 
 
-
 from uuid import uuid4
 from datetime import datetime
 
@@ -25,7 +24,9 @@ class BaseModel():
     def __str__(self):
         """human readable rep of all my instances"""
 
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(
+                self.__class__.__name__, self.id, self.__dict__
+                )
 
     def save(self):
         """updates time stamp on updated_at time stamp"""

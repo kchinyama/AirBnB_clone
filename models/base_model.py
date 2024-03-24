@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
-"""BaseModel module that will define all the common attributes
+"""
+BaseModel module that will define all the common attributes
 and methods for all classes
 """
 

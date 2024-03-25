@@ -5,10 +5,8 @@ serialisation and deserialisation all of my
 objects
 """
 
-
 import json
-from models.base_model import BaseModel
-
+#from models.base_model import BaseModel
 
 class FileStorage():
     """file storage class with methods that ensure 
@@ -17,8 +15,6 @@ class FileStorage():
     __file_path = "file.json"
 
     __objects = {}
-
-    def_classes = {"BaseModel": BaseModel}
 
 
     def all(self):
@@ -37,33 +33,34 @@ class FileStorage():
         """serialises objects to json file in the path 
         indicted above i.e __file_path"""
 
-        pyObjs = {}
+        pyDict = {}
 
         for key, value in FileStorage.__objects.items():
 
-            pyObjs[key] = value.to_dict()
+            pyDict[key] = value.to_dict()
 
             with open(FileStorage.__file_path, "w", encoding='utf-8') as jstr:
-
-                json.dump(pyObjs, jstr)
-
+                json.dump(pyDict, jstr)
 
     def reload(self):
-        """deserialises the json file to __objects, if file path 
-        doesn't exists ensure no exception is raised"""
+        """deserializes the JSON file to __objects, if file path exists
+        otherwise, does nothing"""
+
+        from models.base_model import BaseModel
+
+        defined_classes = {"BaseModel": BaseModel}
 
         try:
             with open(FileStorage.__file_path, "r", encoding='utf-8') as jfile:
+                deserialed_data = json.load(jfile)
 
-                deserialised_data = json.load(jfile)
+                for objVals in deserialed_data.values():
 
-                for objVals in deserialised.values():
+                    clsname = objVals["__class__"]
 
-                    clsName = objVals['__class__']
-
-                    clsObj = self.def_Classes[clsName]
+                    clsObj = defined_classes[clsname]
 
                     self.new(clsObj(**objVals))
 
-        except Exception:
+        except FileNotFoundError:
             pass

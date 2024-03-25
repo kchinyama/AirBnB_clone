@@ -5,12 +5,13 @@ manipulation of data"""
 
 
 import cmd
+import sys
 
 
 class HBNBCommand(cmd.Cmd):
     """class that holds methods for my command line console"""
 
-    prompt = '(hbnb) '
+    prompt = '(hbnb) ' 
 
     def do_quit(self, line):
         """quits the command interpretor"""
@@ -34,6 +35,7 @@ class HBNBCommand(cmd.Cmd):
 
     def help_quit(self):
         print("Quit command to exit the program\n")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

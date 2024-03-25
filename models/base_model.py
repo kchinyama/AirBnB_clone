@@ -8,7 +8,6 @@ and methods for all classes
 
 from uuid import uuid4
 from datetime import datetime
-from models.engine.file_storage import FileStorage
 from models import storage
 
 class BaseModel():
@@ -33,8 +32,8 @@ class BaseModel():
         else:
             self.id = str(uuid4())
             self.created_at = datetime.now()
-
-            storage.new()
+            self.updated_at = datetime.now()
+            storage.new(self)
 
            # self.updated_at = datetime.now()
 

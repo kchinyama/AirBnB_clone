@@ -47,8 +47,9 @@ class FileStorage():
         otherwise, does nothing"""
 
         from models.base_model import BaseModel
+        from models.user import User
 
-        defined_classes = {"BaseModel": BaseModel}
+        defined_classes = {"BaseModel": BaseModel, "User": User}
 
         try:
             with open(FileStorage.__file_path, "r", encoding='utf-8') as jfile:

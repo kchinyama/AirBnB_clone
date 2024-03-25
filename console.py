@@ -8,6 +8,7 @@ import cmd
 import sys
 from models import storage
 from models.base_model import BaseModel
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -15,7 +16,7 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = '(hbnb) '
 
-    definedClasses = {'BaseModel'}
+    definedClasses = {'BaseModel', 'User'}
 
     def do_quit(self, line):
         """quits the command interpretor"""
@@ -54,8 +55,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
         else:
-            new_instance = BaseModel()
-            new_instance.save()
+            new_instance = eval(args[0])
+            storage.save()
             print(new_instance.id)
 
     def do_show(self, line):
